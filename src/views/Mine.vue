@@ -13,7 +13,7 @@
                         :src="avatar"
                 />
             </div>
-            <div class="user-nickname">
+            <div class="user-nickname" @click="toLogin">
                 {{nickname}}
             </div>
             <div class="user-wallet">
@@ -93,7 +93,9 @@
             }
         },
         methods: {
-
+            toLogin(){
+                this.$router.push("/login")
+            }
         }
     }
 </script>
