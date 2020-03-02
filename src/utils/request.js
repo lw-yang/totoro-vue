@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import {Notify } from 'vant';
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
@@ -15,17 +16,22 @@ service.interceptors.request.use(
         }
     },
     err => {
+        Notify("网络开小差了~");
         return Promise.reject(err)
     }
 );
 
-axios.interceptors.response.use(
+service.interceptors.response.use(
     response => {
-        console.log(response)
         return response;
     },
     err => {
-        this.$toast(err)
+        let err_data = err.response.data
+        if (err_data.err_code == null){
+            Notify("服务器开小差啦, 请联系作者~");
+        }else {
+            Notify(err_data.err_code + "  " + err_data.err_message);
+        }
         return Promise.reject(err)
     }
 );

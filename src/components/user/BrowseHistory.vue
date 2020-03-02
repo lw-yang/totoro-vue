@@ -36,7 +36,7 @@
 <style lang="scss" scoped>
 .history{
     margin-top: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     background-color: white;
     /*height: 110px;*/
     &-text{

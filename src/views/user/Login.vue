@@ -26,10 +26,10 @@
             </div>
         </van-form>
         <div class="login-help">
-            <div class="login-help-forget-password" @click="forgetPassword">
+            <div class="login-help-forget-password" @click="toForgetPassword">
                 忘记密码？
             </div>
-            <div class="login-help-register" @click="register">
+            <div class="login-help-register" @click="toRegister">
                 没有账号？立即注册
             </div>
         </div>
@@ -63,20 +63,25 @@
         },
         methods: {
             onSubmit(values) {
+                console.log('submit', values);
+
                 login(values).then(res => {
-                    console.log(res)
+                    let data = res.data
+
+                    this.$store.commit("setUser", data)
+                    this.$store.commit("setToken", data.token)
+
+                    window.localStorage.setItem("token", data.token)
+
+                    this.$router.go(-1)
                 }).catch(err => {
                     console.log(err)
                 })
-                // console.log(this.$store.state.user.token)
-                // this.$store.commit("setToken", "token")
-                console.log('submit', values);
             },
-            register(){
+            toForgetPassword(){
+            },
+            toRegister(){
                 this.$router.push("/register")
-            },
-            forgetPassword(){
-
             }
         }
     }

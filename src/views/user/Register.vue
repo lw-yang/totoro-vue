@@ -20,9 +20,9 @@
                     class="register-form-password"
             />
             <van-field
-                    v-model="rPassword"
+                    v-model="repeatPassword"
                     type="password"
-                    name="rPassword"
+                    name="repeatPassword"
                     label="密 码"
                     placeholder="请再次输入密码"
                     :rules="[{ validator, message: '两次输入密码不一致'}]"
@@ -42,8 +42,13 @@
     import Vue from 'vue';
     import { Field } from 'vant';
     import { Cell, CellGroup } from 'vant';
+    import { Form } from 'vant';
+    import { Button } from 'vant';
     import NavBar from "../../components/NavBar";
-
+    import {register} from "../../api/user";
+    import {Toast} from 'vant';
+    Vue.use(Button);
+    Vue.use(Form);
     Vue.use(Cell);
     Vue.use(CellGroup);
     Vue.use(Field);
@@ -54,17 +59,29 @@
         data() {
             return {
                 username: '',
-                password: '123',
-                rPassword: '123',
+                password: '',
+                repeatPassword: '',
                 title: "用户注册"
             }
         },
         methods: {
             onSubmit(values){
                 console.log('submit', values);
+
+                register(values).then(res => {
+                    console.log(res)
+                    Toast({
+                        message: '注册成功',
+                        position: 'bottom'
+                    });
+                    this.$router.go(-1)
+                }).catch(e => {
+                    let err_data = e.response.data
+                    console.log("注册失败：" + err_data.err_code +" " + err_data.err_message);
+                })
             },
-            validator(rPassword){
-                return this.password === rPassword
+            validator(repeatPassword){
+                return this.password === repeatPassword
             }
         }
     }
