@@ -37,6 +37,7 @@ const routes = [
       }
     ]
   },
+
   {
     path: '/login',
     name: 'Login',
@@ -56,14 +57,20 @@ const routes = [
     path: '/setting/address',
     name: 'Address',
     component: () => import(/* webpackChunkName: "address" */ '@/views/user/Address.vue')
+  },
+  {
+    path: '/qr',
+    name: 'Qr',
+    component: () => import(/* webpackChunkName: "qr" */ '@/views/user/QrCode.vue')
   }
+
 
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

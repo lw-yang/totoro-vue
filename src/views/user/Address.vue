@@ -22,7 +22,7 @@
         components: {NavBar},
         data() {
             return {
-                title: "地址管理",
+                title: "地 址 管 理",
                 chosenAddressId: '1',
                 list: [
                     {

@@ -102,14 +102,15 @@
                 this.$router.push("/setting")
             },
             toQR(){
-
+                this.$router.push('/qr')
             }
         },
 
         created() {
             let token = window.localStorage.getItem("token")
-            if (token !== null && this.$store.getters.userInfo.nickname == null){
+            if (token !== null && this.$store.getters.userInfo.nickname === null){
                 getUserByToken(token).then(res =>{
+
                     let data = res.data
                     console.log(data)
                     this.$store.commit("setUser", data)
@@ -137,13 +138,12 @@
     display: flex;
     flex-direction: column;
     background-color: #e6e6e6;
+    border-bottom: 5px solid #e6e6e6;
     margin-bottom: 55px;
 
     .user{
         height: 220px;
         padding-top: 10px;
-        border-bottom-left-radius: 80px;
-        border-bottom-right-radius: 80px;
         background-image: url("../assets/user/user-background.png");
 
         &-setting{
@@ -224,10 +224,10 @@
         }
     }
     .order{
-        /*height: 70px;*/
+
     }
     .history{
-        /*height: 110px;*/
+
     }
 
     .tools{

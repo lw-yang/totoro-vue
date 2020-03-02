@@ -6,12 +6,6 @@
 
 <script>
 
-export default {
-  beforeCreate() {
-
-  }
-}
-
 </script>
 
 <style lang="scss">

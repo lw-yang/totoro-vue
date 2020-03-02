@@ -61,7 +61,7 @@
                 username: '',
                 password: '',
                 repeatPassword: '',
-                title: "用户注册"
+                title: "用 户 注 册"
             }
         },
         methods: {

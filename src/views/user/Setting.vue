@@ -36,7 +36,7 @@
             <van-cell title="关于Totoro" icon="" is-link/>
             <van-cell title="联系作者" icon="" is-link/>
         </van-cell-group>
-        <van-button type="danger" size="large" round class="setting-logout" @click="logout">退 出 登 录</van-button>
+        <van-button v-if="this.$store.getters.userInfo.nickname !== undefined" type="danger" size="large" round class="setting-logout" @click="logout">退 出 登 录</van-button>
 
         <popup-update :show="popupToggle" :origin-data="popupOriginDate" :label="popupLabel"></popup-update>
         <van-action-sheet v-model="sexActionSheetShow" :actions="sexActions" @select="sexActionSelect" />
@@ -78,7 +78,7 @@
             return {
                 avatar: this.$store.getters.userInfo.avatar || require('@/assets/user/user-unlogin.png'),
                 username: this.$store.getters.userInfo.nickname || '',
-                sex: this.$store.getters.userInfo.sex || 0,
+                sex: this.$store.getters.userInfo.sex || '',
                 birthday: this.$store.getters.userInfo.birthday || '',
                 address: this.$store.getters.userInfo.address || '',
                 phone: this.$store.getters.userInfo.phone || '',
@@ -99,6 +99,9 @@
         },
         computed: {
             sexStr: function () {
+                if (this.sex === ''){
+                    return ''
+                }
                 if (this.sex === 1){
                     return "男"
                 }else if (this.sex === 2){
@@ -108,6 +111,9 @@
                 }
             },
             phoneStr: function () {
+                if (this.phone === ''){
+                    return ''
+                }
                 let prefix = this.phone.substring(0, 3)
                 let suffix = this.phone.substring(7, 11)
                 return prefix.concat("****").concat(suffix)
@@ -188,7 +194,7 @@
 
         mounted() {
             let token = window.localStorage.getItem("token")
-            if (token !== null && this.$store.getters.userInfo.nickname == null){
+            if (token !== null && this.$store.getters.userInfo.nickname === null){
                 getUserByToken(token).then(res =>{
                     let data = res.data
                     console.log("===getUserByToken===")
