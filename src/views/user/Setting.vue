@@ -36,7 +36,7 @@
             <van-cell title="关于Totoro" icon="" is-link/>
             <van-cell title="联系作者" icon="" is-link/>
         </van-cell-group>
-        <van-button v-if="this.$store.getters.userInfo.nickname !== undefined" type="danger" size="large" round class="setting-logout" @click="logout">退 出 登 录</van-button>
+        <van-button v-if="this.$store.getters.userInfo.nickname != null" type="danger" size="large" round class="setting-logout" @click="logout">退 出 登 录</van-button>
 
         <popup-update :show="popupToggle" :origin-data="popupOriginDate" :label="popupLabel"></popup-update>
         <van-action-sheet v-model="sexActionSheetShow" :actions="sexActions" @select="sexActionSelect" />
@@ -123,7 +123,7 @@
         methods: {
 
             logout(){
-                window.localStorage.setItem("token", null)
+                window.localStorage.removeItem("token")
                 this.$store.commit("setUser", Object)
                 this.$router.replace("/mine")
             },
@@ -194,10 +194,9 @@
 
         mounted() {
             let token = window.localStorage.getItem("token")
-            if (token !== null && this.$store.getters.userInfo.nickname === null){
+            if (token !== null && this.$store.getters.userInfo.nickname == null){
                 getUserByToken(token).then(res =>{
                     let data = res.data
-                    console.log("===getUserByToken===")
                     console.log(data)
                     this.$store.commit("setUser", data)
                     this.$store.commit("setToken", data.token)

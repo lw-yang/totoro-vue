@@ -108,7 +108,7 @@
 
         created() {
             let token = window.localStorage.getItem("token")
-            if (token !== null && this.$store.getters.userInfo.nickname === null){
+            if (token !== null && this.$store.getters.userInfo.nickname == null){
                 getUserByToken(token).then(res =>{
 
                     let data = res.data
