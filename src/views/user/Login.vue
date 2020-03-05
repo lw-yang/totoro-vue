@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <nav-bar :title="title" class="login-title"></nav-bar>
+        <nav-bar title="用 户 登 录" class="login-title"></nav-bar>
         <van-form colon label-width="70px" label-align="center" @submit="onSubmit" class="login-form">
             <van-field
                     v-model="username"
@@ -58,7 +58,6 @@
             return {
                 username: '',
                 password: '',
-                title: '用 户 登 录'
             };
         },
         methods: {

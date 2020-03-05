@@ -1,6 +1,6 @@
 <template>
     <div class="setting">
-        <nav-bar :title="title" class="setting-title"></nav-bar>
+        <nav-bar title="用 户 设 置" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
             <van-cell title="头像" clickable is-link class="setting-info-avatar" @click="popupAvatar">
                 <van-image
@@ -83,7 +83,6 @@
                 address: this.$store.getters.userInfo.address || '',
                 phone: this.$store.getters.userInfo.phone || '',
                 email: this.$store.getters.userInfo.email || '',
-                title: '用 户 设 置',
 
                 popupToggle: false,
                 popupOriginDate: '',
@@ -125,7 +124,7 @@
             logout(){
                 window.localStorage.removeItem("token")
                 this.$store.commit("setUser", Object)
-                this.$router.replace("/mine")
+                this.$router.replace("/user")
             },
             popupAvatar(){
 
@@ -156,9 +155,7 @@
             },
             sexActionSelect(item){
                 this.sexActionSheetShow = false;
-                let data = {
-                    "id": this.$store.getters.userInfo.id
-                }
+                let data = {}
                 if (item.name === "男"){
                     data["sex"] = 1
                 }else if (item.name === "女"){
@@ -166,7 +163,8 @@
                 }else {
                     data["sex"] = 0
                 }
-                updateUser(data).then(res => {
+                let id = this.$store.getters.userInfo.id
+                updateUser(data, id).then(res => {
                     console.log(res)
                     this.$router.go(0)
                 }).catch(e => {
@@ -175,12 +173,11 @@
             },
             birthdaySelect(date){
                 this.birthdayCalendarShow = false;
-                let data = {
-                    "id": this.$store.getters.userInfo.id
-                }
+                let data = {}
                 date.setDate(date.getDate() + 1);
                 data["birthday"] = date
-                updateUser(data).then(res => {
+                let id = this.$store.getters.userInfo.id
+                updateUser(data, id).then(res => {
                     console.log(res)
                     this.$router.go(0)
                 }).catch(e => {

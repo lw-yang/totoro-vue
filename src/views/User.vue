@@ -102,7 +102,7 @@
                 this.$router.push("/setting")
             },
             toQR(){
-                this.$router.push('/qr')
+                this.$router.push('/user/qr')
             }
         },
 

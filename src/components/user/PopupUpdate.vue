@@ -65,11 +65,10 @@
                 }else if (this.label === '邮箱'){
                     updateField = 'email'
                 }
-                let data = {
-                    "id": this.$store.getters.userInfo.id,
-                }
+                let data = {}
                 data[updateField] = this.updateData
-                updateUser(data).then(res => {
+                let id = this.$store.getters.userInfo.id
+                updateUser(data, id).then(res => {
                     console.log(res)
                     this.$router.go(0)
                 }).catch(e => {

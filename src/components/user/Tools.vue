@@ -4,11 +4,11 @@
             <van-grid-item icon="like" text="我的收藏" to="" />
             <van-grid-item icon="service" text="客户服务" to=""/>
             <van-grid-item icon="gem" text="会员服务" to=""/>
-            <van-grid-item icon="coupon" text="优惠券" to=""/>
+            <van-grid-item icon="coupon" text="优惠券" to="/user/coupon"/>
             <van-grid-item icon="gold-coin" text="我的钱包" to=""/>
             <van-grid-item icon="point-gift" text="积分礼品" to=""/>
             <van-grid-item icon="umbrella-circle" text="安全服务" to=""/>
-            <van-grid-item icon="manager" text="联系作者" to="/qr"/>
+            <van-grid-item icon="manager" text="联系作者" to="/user/qr"/>
 
         </van-grid>
     </div>

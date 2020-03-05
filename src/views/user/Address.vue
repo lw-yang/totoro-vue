@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav-bar :title="title" class="login-title"></nav-bar>
+        <nav-bar title="地 址 管 理" class="login-title"></nav-bar>
         <van-address-list
                 v-model="chosenAddressId"
                 :list="list"
@@ -22,7 +22,6 @@
         components: {NavBar},
         data() {
             return {
-                title: "地 址 管 理",
                 chosenAddressId: '1',
                 list: [
                     {
