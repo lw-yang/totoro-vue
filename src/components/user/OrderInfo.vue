@@ -23,7 +23,4 @@
 </script>
 
 <style lang="scss" scoped>
-.order{
-    height: 70px;
-}
 </style>

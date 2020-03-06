@@ -8,7 +8,7 @@
             <van-grid-item icon="gold-coin" text="我的钱包" to=""/>
             <van-grid-item icon="point-gift" text="积分礼品" to=""/>
             <van-grid-item icon="umbrella-circle" text="安全服务" to=""/>
-            <van-grid-item icon="manager" text="联系作者" to=""/>
+            <van-grid-item icon="manager" text="联系作者" to="/qr"/>
 
         </van-grid>
     </div>

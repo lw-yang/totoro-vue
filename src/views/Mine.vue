@@ -2,8 +2,8 @@
     <div class="mine">
         <div class="user">
             <div class="user-setting">
-                <van-icon class="user-setting-icon" name="setting-o" size="20" />
-                <van-icon class="user-setting-icon" name="qr" size="20"/>
+                <van-icon class="user-setting-icon" name="setting-o" size="20" @click="toSetting"/>
+                <van-icon class="user-setting-icon" name="qr" size="20" @click="toQR"/>
             </div>
             <div class="user-avatar">
                 <van-image
@@ -11,9 +11,10 @@
                         width="60"
                         height="60"
                         :src="avatar"
+                        @click="toLogin"
                 />
             </div>
-            <div class="user-nickname">
+            <div class="user-nickname" @click="toLogin">
                 {{nickname}}
             </div>
             <div class="user-wallet">
@@ -62,6 +63,7 @@
     import OrderInfo from "../components/user/OrderInfo";
     import BrowseHistory from "../components/user/BrowseHistory";
     import Tools from "../components/user/Tools";
+    import {getUserByToken} from "@/api/user";
 
     Vue.use(Grid);
     Vue.use(GridItem);
@@ -73,11 +75,11 @@
         components: {Tools, BrowseHistory, OrderInfo},
         data() {
             return {
-                nickname: "登录/注册",
-                avatar: require('../assets/user/user-unlogin.png'),
-                points: 0,
-                coupon: 0,
-                balance: 0.01,
+                nickname: this.$store.getters.userInfo.nickname || "登录/注册",
+                avatar: this.$store.getters.userInfo.avatar || require('../assets/user/user-unlogin.png'),
+                points: this.$store.getters.userInfo.points || 0,
+                coupon: this.$store.getters.userInfo.couponsCount || 0,
+                balance: this.$store.getters.userInfo.balance || 0.00,
                 vipSrc: require("../assets/user/vip-on.svg"),
                 historyList: [{
                         "src": "https://img.yzcdn.cn/vant/cat.jpeg",
@@ -93,24 +95,55 @@
             }
         },
         methods: {
+            toLogin(){
+                this.$router.push("/login")
+            },
+            toSetting(){
+                this.$router.push("/setting")
+            },
+            toQR(){
+                this.$router.push('/qr')
+            }
+        },
 
+        created() {
+            let token = window.localStorage.getItem("token")
+            if (token !== null && this.$store.getters.userInfo.nickname === null){
+                getUserByToken(token).then(res =>{
+
+                    let data = res.data
+                    console.log(data)
+                    this.$store.commit("setUser", data)
+                    this.$store.commit("setToken", data.token)
+                    window.localStorage.setItem("token", data.token)
+
+                    this.nickname = data.nickname
+                    this.avatar = data.avatar
+                    this.points = data.points
+                    this.coupon = data.couponsCount
+                    this.balance = data.balance
+
+                    //TODO this.historyList = res.data.historyList
+                }).catch(e => {
+                    console.log(e)
+                })
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
 .mine{
-    height: 650px;
     width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #e6e6e6;
+    border-bottom: 5px solid #e6e6e6;
+    margin-bottom: 55px;
 
     .user{
         height: 220px;
         padding-top: 10px;
-        border-bottom-left-radius: 80px;
-        border-bottom-right-radius: 80px;
         background-image: url("../assets/user/user-background.png");
 
         &-setting{
@@ -137,6 +170,7 @@
             display: flex;
             height: 30px;
             font-size: 12px;
+            justify-content: center;
 
             &-value{
                 font-weight: bold;
@@ -190,10 +224,10 @@
         }
     }
     .order{
-        /*height: 70px;*/
+
     }
     .history{
-        /*height: 110px;*/
+
     }
 
     .tools{

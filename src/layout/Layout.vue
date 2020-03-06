@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <router-view class="main"/>
-        <van-tabbar route class="tabb">
+        <van-tabbar route class="tabb" active-color="#f4456f">
             <van-tabbar-item replace to="/home" >
                 <van-icon slot="icon" name="home-o" size="25px"/>
                 首页

@@ -36,14 +36,41 @@ const routes = [
         component: () => import(/* webpackChunkName: "mine" */ '@/views/Mine.vue')
       }
     ]
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "login" */ '@/views/user/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "register" */ '@/views/user/Register.vue')
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import(/* webpackChunkName: "setting" */ '@/views/user/Setting.vue')
+  },
+  {
+    path: '/setting/address',
+    name: 'Address',
+    component: () => import(/* webpackChunkName: "address" */ '@/views/user/Address.vue')
+  },
+  {
+    path: '/qr',
+    name: 'Qr',
+    component: () => import(/* webpackChunkName: "qr" */ '@/views/user/QrCode.vue')
   }
+
 
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
