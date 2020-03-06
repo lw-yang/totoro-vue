@@ -60,6 +60,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "address" */ '@/views/user/Address.vue')
   },
   {
+    path: '/setting/addressAdd',
+    name: 'AddressAdd',
+    component: () => import(/* webpackChunkName: "addressAdd" */ '@/views/user/AddressAdd.vue')
+  },
+  {
+    path: '/setting/addressEdit',
+    name: 'AddressEdit',
+    component: () => import(/* webpackChunkName: "addressEdit" */ '@/views/user/AddressEdit.vue')
+  },
+  {
     path: '/user/qr',
     name: 'Qr',
     component: () => import(/* webpackChunkName: "qr" */ '@/views/user/QrCode.vue')

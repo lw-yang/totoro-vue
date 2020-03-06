@@ -17,30 +17,9 @@
     import Vue from 'vue';
     import { CouponCell, CouponList } from 'vant';
     import NavBar from "../../components/NavBar";
+    import {listCoupons} from "../../api/coupon";
     Vue.use(CouponCell);
     Vue.use(CouponList);
-
-    const coupon = {
-        condition: '无使用门槛',
-        reason: '',
-        value: 150,
-        name: '优惠券名称',
-        startAt: 1489104000,
-        endAt: 1514592000,
-        valueDesc: '1.5',
-        unitDesc: '元'
-    };
-
-    const disabledCoupons = {
-        condition: '无使用门槛',
-        reason: '',
-        value: 150,
-        name: '优惠券名称',
-        startAt: 1489104000,
-        endAt: 1514592000,
-        valueDesc: '1.5',
-        unitDesc: '元'
-    }
 
     export default {
         name: "Coupon",
@@ -48,14 +27,51 @@
         data() {
             return {
                 chosenCoupon: -1,
-                coupons: [coupon],
-                disabledCoupons: [disabledCoupons]
+                coupons: [],
+                disabledCoupons: []
             }
         },
         methods: {
             onChange(index) {
                 this.chosenCoupon = index;
             }
+        },
+        created() {
+            let id = this.$store.getters.userInfo.id
+            listCoupons(id).then(res => {
+                let availableCoupons = res.data.availableCoupons
+                let disabledCoupons = res.data.expiredCoupons
+
+                console.log(availableCoupons)
+                console.log(disabledCoupons)
+
+                for( let i of availableCoupons){
+                    let coupon = {}
+                    coupon.condition = i.useCondition === 0 ? "无门槛使用" : "满" + i.useCondition + "可用"
+                    coupon.value = i.value * 100
+                    coupon.name = i.name
+                    coupon.startAt = i.effectiveTime
+                    coupon.endAt = i.expireTime
+                    coupon.valueDesc = '' + i.value
+                    coupon.unitDesc = '元'
+
+                    this.coupons.push(coupon)
+                }
+                for( let i of disabledCoupons){
+                    let disabledCoupons = {}
+                    disabledCoupons.condition = i.useCondition === 0 ? "无门槛使用" : "满" + i.useCondition + "可用"
+                    disabledCoupons.value = i.value * 100
+                    disabledCoupons.name = i.name
+                    disabledCoupons.startAt = i.effectiveTime
+                    disabledCoupons.endAt = i.expireTime
+                    disabledCoupons.valueDesc = '' + i.value
+                    disabledCoupons.unitDesc = '元'
+
+                    this.disabledCoupons.push(disabledCoupons)
+                }
+            }).catch(e => {
+                console.log(e)
+            })
         }
     }
 </script>

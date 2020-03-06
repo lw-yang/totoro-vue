@@ -34,8 +34,8 @@
         // components: {NavBar},
         data() {
             return {
-                qrImage: require('@/assets/user/qr1.jpg'),
-                nameImage: require('@/assets/user/name.png')
+                qrImage: require('@/assets/img/user/qr1.jpg'),
+                nameImage: require('@/assets/img/user/name.png')
             }
         }
     }

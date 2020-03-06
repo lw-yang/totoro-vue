@@ -1,6 +1,6 @@
 <template>
     <div class="setting">
-        <nav-bar title="用 户 设 置" class="setting-title"></nav-bar>
+        <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
             <van-cell title="头像" clickable is-link class="setting-info-avatar" @click="popupAvatar">
                 <van-image
@@ -20,12 +20,12 @@
         <van-cell-group class="setting-contact">
             <van-cell title="邮箱" :value="email" icon="" is-link @click="popupEmail"/>
             <van-cell title="手机号" :value="phoneStr" icon="" is-link @click="popupPhone"/>
-            <van-cell title="地址管理" :value="address" icon="" is-link @click="toAddress"/>
+            <van-cell title="地址管理" :value="address" icon="" is-link to="/setting/address"/>
         </van-cell-group>
         <van-cell-group class="setting-service">
+            <van-cell title="优惠券" icon="" to="/user/coupon" is-link/>
             <van-cell title="我的会员" icon="" is-link/>
             <van-cell title="积分礼品" icon="" is-link/>
-            <van-cell title="优惠券" icon="" is-link/>
         </van-cell-group>
         <van-cell-group class="setting-security">
             <van-cell title="我的钱包" icon="" is-link/>
@@ -34,7 +34,7 @@
         <van-cell-group class="setting-system">
             <van-cell title="意见反馈" icon="" is-link/>
             <van-cell title="关于Totoro" icon="" is-link/>
-            <van-cell title="联系作者" icon="" is-link/>
+            <van-cell title="联系作者" icon="" to="/user/qr" is-link/>
         </van-cell-group>
         <van-button v-if="this.$store.getters.userInfo.nickname != null" type="danger" size="large" round class="setting-logout" @click="logout">退 出 登 录</van-button>
 
@@ -76,7 +76,7 @@
         components: {PopupUpdate, NavBar},
         data() {
             return {
-                avatar: this.$store.getters.userInfo.avatar || require('@/assets/user/user-unlogin.png'),
+                avatar: this.$store.getters.userInfo.avatar || require('@/assets/img/user/user-unlogin.png'),
                 username: this.$store.getters.userInfo.nickname || '',
                 sex: this.$store.getters.userInfo.sex || '',
                 birthday: this.$store.getters.userInfo.birthday || '',
@@ -98,7 +98,7 @@
         },
         computed: {
             sexStr: function () {
-                if (this.sex === ''){
+                if (this.sex == null){
                     return ''
                 }
                 if (this.sex === 1){
@@ -110,8 +110,8 @@
                 }
             },
             phoneStr: function () {
-                if (this.phone === ''){
-                    return ''
+                if (this.phone == null){
+                    return null
                 }
                 let prefix = this.phone.substring(0, 3)
                 let suffix = this.phone.substring(7, 11)
@@ -139,9 +139,6 @@
             },
             popupBirthday(){
                 this.birthdayCalendarShow = true
-            },
-            toAddress(){
-                this.$router.push("/setting/address")
             },
             popupPhone(){
                 this.popupToggle = !this.popupToggle
