@@ -2,16 +2,22 @@
     <div class="setting">
         <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
-            <van-cell title="头像" clickable is-link class="setting-info-avatar" @click="popupAvatar">
-                <van-image
-                        round
-                        slot="right-icon"
-                        width="30"
-                        height="30"
-                        :src="avatar"
 
-                />
+            <van-cell title="头像" clickable is-link class="setting-info-avatar" @click="popupAvatar">
+                <van-uploader :after-read="uploadAvatar">
+                    <div class="setting-info-avatar-upload">
+                        <van-image
+                            round
+                            slot="right-icon"
+                            width="30"
+                            height="30"
+                            :src="avatar"
+
+                        />
+                    </div>
+                </van-uploader>
             </van-cell>
+
             <van-cell title="用户名" :value="username" icon=""  is-link @click="popupUsername"/>
             <van-cell title="性别" :value="sexStr" icon="" is-link @click="popupSex"/>
             <van-cell title="出生日期" :value="birthday" icon="" is-link @click="popupBirthday"/>
@@ -59,7 +65,9 @@
     import PopupUpdate from "../../components/user/PopupUpdate";
     import {getUserByToken} from "@/api/user";
     import {updateUser} from "../../api/user";
+    import { Uploader } from 'vant';
 
+    Vue.use(Uploader);
     Vue.use(Popup);
     Vue.use(DatetimePicker);
     Vue.use(Field);
@@ -120,7 +128,9 @@
 
         },
         methods: {
-
+            uploadAvatar(file){
+                console.log(file)
+            },
             logout(){
                 window.localStorage.removeItem("token")
                 this.$store.commit("setUser", Object)
@@ -234,6 +244,12 @@
                 display: flex;
                 align-items: center;
             }
+            .van-cell__value{
+                .van-uploader{
+
+                }
+            }
+
         }
     }
     &-contact{
