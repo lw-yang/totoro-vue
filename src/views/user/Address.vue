@@ -1,9 +1,10 @@
 <template>
-    <div>
-        <nav-bar :title="title" class="login-title"></nav-bar>
+    <div class="address">
+        <nav-bar title="地 址 管 理" path="/setting/" class="address-title"></nav-bar>
         <van-address-list
                 v-model="chosenAddressId"
                 :list="list"
+                :switchable="true"
                 default-tag-text="默认"
                 @add="onAdd"
                 @edit="onEdit"
@@ -14,44 +15,52 @@
 <script>
     import Vue from 'vue';
     import { AddressList } from 'vant';
-    import { Toast } from 'vant';
     import NavBar from "../../components/NavBar";
+    import {listAddresses} from "../../api/address";
     Vue.use(AddressList);
     export default {
         name: "Address",
         components: {NavBar},
         data() {
             return {
-                title: "地 址 管 理",
                 chosenAddressId: '1',
-                list: [
-                    {
-                        id: '1',
-                        name: '张三',
-                        tel: '13000000000',
-                        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
-                        isDefault: true
-                    },
-                    {
-                        id: '2',
-                        name: '李四',
-                        tel: '1310000000',
-                        address: '浙江省杭州市拱墅区莫干山路 50 号'
-                    }
-                ]
+                list: []
             }
         },
         methods: {
             onAdd() {
-                Toast('新增地址');
+                this.$router.push("/setting/addressAdd")
             },
-            onEdit(item, index) {
-                Toast('编辑地址:' + index);
+            onEdit(item) {
+                this.$router.push({ path: '/setting/addressEdit', query: { address: item}})
             }
+        },
+        created() {
+            let id = this.$store.getters.userInfo.id
+            listAddresses(id).then(res => {
+                let addressList = res.data
+                for( let i of addressList) {
+                    let address = {}
+                    address.id = i.id
+                    address.address = i.address
+                    address.name = i.receiver
+                    address.tel = i.receiverPhone
+                    address.isDefault = i.defaultAddress !== 0
+                    this.list.push(address)
+                }
+            }).catch(e => {
+                console.log(e)
+            })
         }
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.address{
+    &-title{
+        .van-nav-bar__title{
+            font-weight: bold;
+        }
+    }
+}
 </style>

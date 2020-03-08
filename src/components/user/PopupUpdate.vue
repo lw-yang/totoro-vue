@@ -47,13 +47,15 @@
             }
         },
         methods: {
-            validator(val){
+            validator(){
                 if (this.label === '用户名'){
-                    return val !== ""
+                    return this.updateData !== ""
                 }else if (this.label === '手机号'){
-                    return /(13|14|15|17|18|19)[0-9]{9}/.test(val)
+                    return /(13|14|15|17|18|19)[0-9]{9}/.test(this.updateData)
                 }else if (this.label === '邮箱'){
-                    return /\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}/.test(val)
+                    console.log(this.updateData)
+                    return /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.updateData)
+                    // return /\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}/.test(this.updateData)
                 }
             },
             submit(){
@@ -65,11 +67,10 @@
                 }else if (this.label === '邮箱'){
                     updateField = 'email'
                 }
-                let data = {
-                    "id": this.$store.getters.userInfo.id,
-                }
+                let data = {}
                 data[updateField] = this.updateData
-                updateUser(data).then(res => {
+                let id = this.$store.getters.userInfo.id
+                updateUser(data, id).then(res => {
                     console.log(res)
                     this.$router.go(0)
                 }).catch(e => {

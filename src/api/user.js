@@ -18,14 +18,14 @@ export function register(data) {
 
 export function getUserByToken(data) {
     return request({
-        url: '/users/?token=' + data,
+        url: '/users/' + data,
         method: 'get',
     })
 }
 
-export function updateUser(data) {
+export function updateUser(data, id) {
     return request({
-        url: '/users/',
+        url: '/users/' + id,
         method: 'put',
         data
     })

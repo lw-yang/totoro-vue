@@ -1,6 +1,7 @@
 <template>
     <van-nav-bar
             :title="title"
+            :path="path"
             left-text="返回"
             left-arrow
             @click-left="onClickLeft"
@@ -16,11 +17,16 @@
     export default {
         name: "NavBar",
         props: {
-            title: String
+            title: String,
+            path: String
         },
         methods: {
             onClickLeft() {
-                this.$router.go(-1)
+                if (this.path == null){
+                    this.$router.go(-1)
+                }else {
+                    this.$router.replace(this.path)
+                }
             },
         }
 

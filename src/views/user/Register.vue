@@ -1,6 +1,6 @@
 <template>
     <div class="register">
-        <nav-bar :title="title" class="register-title"></nav-bar>
+        <nav-bar title="用 户 注 册" class="register-title"></nav-bar>
         <van-form colon label-width="70px" label-align="center" @submit="onSubmit" class="register-form">
             <van-field
                     v-model="username"
@@ -61,7 +61,6 @@
                 username: '',
                 password: '',
                 repeatPassword: '',
-                title: "用 户 注 册"
             }
         },
         methods: {

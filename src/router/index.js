@@ -31,13 +31,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "cart" */ '@/views/Cart.vue')
       },
       {
-        path: '/mine',
-        name: 'Mine',
-        component: () => import(/* webpackChunkName: "mine" */ '@/views/Mine.vue')
+        path: '/user',
+        name: 'User',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue')
       }
     ]
   },
 
+  //user
   {
     path: '/login',
     name: 'Login',
@@ -59,9 +60,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "address" */ '@/views/user/Address.vue')
   },
   {
-    path: '/qr',
+    path: '/setting/addressAdd',
+    name: 'AddressAdd',
+    component: () => import(/* webpackChunkName: "addressAdd" */ '@/views/user/AddressAdd.vue')
+  },
+  {
+    path: '/setting/addressEdit',
+    name: 'AddressEdit',
+    component: () => import(/* webpackChunkName: "addressEdit" */ '@/views/user/AddressEdit.vue')
+  },
+  {
+    path: '/user/qr',
     name: 'Qr',
     component: () => import(/* webpackChunkName: "qr" */ '@/views/user/QrCode.vue')
+  },
+  {
+    path: '/user/coupon',
+    name: 'Qr',
+    component: () => import(/* webpackChunkName: "qr" */ '@/views/user/Coupon.vue')
   }
 
 

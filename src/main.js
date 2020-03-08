@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import {Toast} from 'vant';
 import { Notify } from 'vant';
+import './assets/js/icon-font';
 
 Vue.use(Notify);
 Vue.use(Toast);

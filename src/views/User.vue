@@ -76,11 +76,11 @@
         data() {
             return {
                 nickname: this.$store.getters.userInfo.nickname || "登录/注册",
-                avatar: this.$store.getters.userInfo.avatar || require('../assets/user/user-unlogin.png'),
+                avatar: this.$store.getters.userInfo.avatar || require('../assets/img/user/user-unlogin.png'),
                 points: this.$store.getters.userInfo.points || 0,
                 coupon: this.$store.getters.userInfo.couponsCount || 0,
                 balance: this.$store.getters.userInfo.balance || 0.00,
-                vipSrc: require("../assets/user/vip-on.svg"),
+                vipSrc: require("../assets/img/user/vip-on.svg"),
                 historyList: [{
                         "src": "https://img.yzcdn.cn/vant/cat.jpeg",
                         "link": "/#",
@@ -96,19 +96,21 @@
         },
         methods: {
             toLogin(){
-                this.$router.push("/login")
+                if (this.$store.getters.userInfo.nickname == null) {
+                    this.$router.push("/login")
+                }
             },
             toSetting(){
                 this.$router.push("/setting")
             },
             toQR(){
-                this.$router.push('/qr')
+                this.$router.push('/user/qr')
             }
         },
 
         created() {
             let token = window.localStorage.getItem("token")
-            if (token !== null && this.$store.getters.userInfo.nickname === null){
+            if (token !== null && this.$store.getters.userInfo.nickname == null){
                 getUserByToken(token).then(res =>{
 
                     let data = res.data
@@ -144,7 +146,7 @@
     .user{
         height: 220px;
         padding-top: 10px;
-        background-image: url("../assets/user/user-background.png");
+        background-image: url("../assets/img/user/user-background.png");
 
         &-setting{
             height: 30px;
