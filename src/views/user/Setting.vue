@@ -4,7 +4,7 @@
         <van-cell-group class="setting-info">
 
             <van-cell title="头像" clickable  class="setting-info-avatar" @click="popupAvatar">
-                <van-uploader style="width:50px" :after-read="uploadAvatar">
+                <van-uploader  :after-read="uploadAvatar">
                     <div class="setting-info-avatar-upload">
                         <van-image
                             round
@@ -106,19 +106,18 @@
         },
         computed: {
             sexStr: function () {
-                if (this.sex == null){
-                    return ''
-                }
                 if (this.sex === 1){
                     return "男"
                 }else if (this.sex === 2){
                     return "女"
-                }else {
+                }else if (this.sex === 0){
                     return "保密"
+                }else {
+                    return ''
                 }
             },
             phoneStr: function () {
-                if (this.phone == null){
+                if (this.phone == null || this.phone === ''){
                     return null
                 }
                 let prefix = this.phone.substring(0, 3)
@@ -133,6 +132,7 @@
             },
             logout(){
                 window.localStorage.removeItem("token")
+                this.$store.commit("setToken", String)
                 this.$store.commit("setUser", Object)
                 this.$router.replace("/user")
             },

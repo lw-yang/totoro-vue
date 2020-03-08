@@ -10,10 +10,10 @@ const service = axios.create({
 // 给每个请求头部加上Token
 service.interceptors.request.use(
     config => {
-        if(store.getters.token) {
+        if(typeof store.getters.token === "string") {
             config.headers['X-Totoro-Token'] = store.getters.token
-            return config;
         }
+        return config;
     },
     err => {
         Notify("网络开小差了~");

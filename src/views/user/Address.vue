@@ -46,6 +46,10 @@
                     address.name = i.receiver
                     address.tel = i.receiverPhone
                     address.isDefault = i.defaultAddress !== 0
+
+                    if (address.isDefault === true){
+                        this.chosenAddressId = address.id
+                    }
                     this.list.push(address)
                 }
             }).catch(e => {
