@@ -3,8 +3,8 @@
         <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
 
-            <van-cell title="头像" clickable is-link class="setting-info-avatar" @click="popupAvatar">
-                <van-uploader :after-read="uploadAvatar">
+            <van-cell title="头像" clickable  class="setting-info-avatar" @click="popupAvatar">
+                <van-uploader style="width:50px" :after-read="uploadAvatar">
                     <div class="setting-info-avatar-upload">
                         <van-image
                             round

@@ -1,6 +1,6 @@
 <template>
     <div class="tools" :clickable="true">
-        <van-grid icon-size="23">
+        <van-grid icon-size="23" clickable>
             <van-grid-item icon="like" text="我的收藏" to="" />
             <van-grid-item icon="service" text="客户服务" to=""/>
             <van-grid-item icon="gem" text="会员服务" to=""/>

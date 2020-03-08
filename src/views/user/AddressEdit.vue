@@ -22,7 +22,7 @@
     import Vue from 'vue';
     import { AddressEdit } from 'vant';
     import NavBar from "../../components/NavBar";
-    import area from "../../assets/area";
+    import area from "../../assets/js/area";
     import {deleteAddress, updateAddress} from "../../api/address";
     Vue.use(AddressEdit);
     export default {
