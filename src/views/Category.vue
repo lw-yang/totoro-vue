@@ -19,7 +19,10 @@
             </div>
             <div class="category-container-main">
                 <div class="category-container-main-banner">
-
+                    <van-image
+                            height="145"
+                            :src="bannerImage"
+                    />
                 </div>
                 <div class="category-container-main-sub">
                     <div class="category-container-main-sub-title">
@@ -64,7 +67,8 @@
                 activeKey: 0,
                 searchValue: '',
                 categoryList: [],
-                subList: []
+                subList: [],
+                bannerImage: require("../assets/img/category/category_banner.png")
             };
         },
         methods: {
@@ -147,10 +151,7 @@
             &-banner{
                 height: 145px;
                 width: 100%;
-                background-image: url("../assets/img/category/category_banner.png");
-                background-size: 100%;
             }
-
             &-sub{
                 margin-top: 10px;
 

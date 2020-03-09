@@ -101,13 +101,12 @@
                 }
             },
             toSetting(){
-                this.$router.push("/setting")
+                this.$router.push("/user/setting")
             },
             toQR(){
                 this.$router.push('/user/qr')
             }
         },
-
         created() {
             let token = window.localStorage.getItem("token")
             if (token !== null && this.$store.getters.userInfo.nickname == null){

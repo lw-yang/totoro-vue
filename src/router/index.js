@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from "../layout/Layout";
+import user from "./user";
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -13,80 +15,57 @@ const routes = [
       {
         path: '/home',
         name: 'Home',
+        meta: {tree: 1},
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
       },
       {
         path: '/category',
         name: 'Category',
+        meta: {tree: 10},
         component: () => import(/* webpackChunkName: "category" */ '@/views/Category.vue')
       },
       {
         path: '/message',
         name: 'Message',
+        meta: {tree: 20},
         component: () => import(/* webpackChunkName: "message" */ '@/views/Message.vue')
       },
       {
         path: '/cart',
         name: 'Cart',
+        meta: {tree: 30},
         component: () => import(/* webpackChunkName: "cart" */ '@/views/Cart.vue')
       },
       {
         path: '/user',
         name: 'User',
+        meta: {tree: 40},
         component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue')
       }
     ]
   },
-
-  //user
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/user/Login.vue')
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import(/* webpackChunkName: "register" */ '@/views/user/Register.vue')
-  },
-  {
-    path: '/setting',
-    name: 'Setting',
-    component: () => import(/* webpackChunkName: "setting" */ '@/views/user/Setting.vue')
-  },
-  {
-    path: '/setting/address',
-    name: 'Address',
-    component: () => import(/* webpackChunkName: "address" */ '@/views/user/Address.vue')
-  },
-  {
-    path: '/setting/addressAdd',
-    name: 'AddressAdd',
-    component: () => import(/* webpackChunkName: "addressAdd" */ '@/views/user/AddressAdd.vue')
-  },
-  {
-    path: '/setting/addressEdit',
-    name: 'AddressEdit',
-    component: () => import(/* webpackChunkName: "addressEdit" */ '@/views/user/AddressEdit.vue')
-  },
-  {
-    path: '/user/qr',
-    name: 'Qr',
-    component: () => import(/* webpackChunkName: "qr" */ '@/views/user/QrCode.vue')
-  },
-  {
-    path: '/user/coupon',
-    name: 'Qr',
-    component: () => import(/* webpackChunkName: "qr" */ '@/views/user/Coupon.vue')
-  }
-
-
+  ...user
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+})
+
+// 路由跳转前进后退动画
+router.beforeEach((to, from, next) => {
+  store.commit('setTransition', '')
+  if (from.meta.tree > to.meta.tree) {
+    // 后退,右滑动
+    store.commit('setTransition', 'van-slide-right')
+  } else if (from.meta.tree < to.meta.tree) {
+    // 前进,左滑动
+    store.commit('setTransition', 'van-slide-left')
+  } else {
+    // store.commit('changeTransition', 'van-fade')
+  }
+  next()
 })
 
 export default router

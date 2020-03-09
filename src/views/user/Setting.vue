@@ -1,5 +1,6 @@
 <template>
-    <div class="setting">
+    <transition :name="transitionName">
+    <div  class="setting">
         <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
 
@@ -26,7 +27,7 @@
         <van-cell-group class="setting-contact">
             <van-cell title="邮箱" :value="email" icon="" is-link @click="popupEmail"/>
             <van-cell title="手机号" :value="phoneStr" icon="" is-link @click="popupPhone"/>
-            <van-cell title="地址管理" :value="address" icon="" is-link to="/setting/address"/>
+            <van-cell title="地址管理" :value="address" icon="" is-link to="/user/setting/address"/>
         </van-cell-group>
         <van-cell-group class="setting-service">
             <van-cell title="优惠券" icon="" to="/user/coupon" is-link/>
@@ -56,8 +57,8 @@
             />
         </van-popup>
     </div>
+    </transition>
 </template>
-
 <script>
     import NavBar from "../../components/NavBar";
     import Vue from 'vue';
@@ -105,6 +106,10 @@
             }
         },
         computed: {
+                transitionName () {
+                    return this.$store.getters.transitionName
+                },
+
             sexStr: function () {
                 if (this.sex === 1){
                     return "男"
@@ -229,6 +234,11 @@
 .setting{
     padding-bottom: 10px ;
     background-color: #e6e6e6;
+
+    position: absolute;
+    width: 100%;
+    transition: all .8s ease;
+    top: 0;
 
     &-title{
         .van-nav-bar__title{
