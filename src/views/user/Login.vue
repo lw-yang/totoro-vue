@@ -1,7 +1,14 @@
 <template>
     <div class="login">
         <nav-bar title="用 户 登 录" class="login-title"></nav-bar>
-        <van-form colon label-width="70px" label-align="center" @submit="onSubmit" class="login-form">
+
+        <div class="login-icon">
+            <svg aria-hidden="true" style="height: 60px; width: 60px">
+                <use xlink:href="#icon-longmao"></use>
+            </svg>
+        </div>
+
+        <van-form colon label-width="80px" label-align="center" @submit="onSubmit" class="login-form">
             <van-field
                     v-model="username"
                     name="username"
@@ -95,19 +102,14 @@
         }
     }
 
-    &-form{
-        margin-top: 150px;
+    &-icon{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
 
-        &-username{
-            .van-field__label{
-                font-size: 15px;
-            }
-        }
-        &-password{
-            .van-field__label{
-                font-size: 15px;
-            }
-        }
+    &-form{
+        margin-top: 40px;
     }
 
     &-help{

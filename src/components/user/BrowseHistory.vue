@@ -2,7 +2,10 @@
     <div class="history">
         <div class="history-text">
             <div class="history-text-title">我的足迹</div>
-            <div class="history-text-more" @click="more">更多</div>
+            <div class="history-text-more" @click="more">
+                更多
+                <van-icon name="arrow" size="" color="#8a8a8a"/>
+            </div>
         </div>
         <van-image
                 width="70"
@@ -56,6 +59,8 @@
             padding-right: 10px;
             padding-top: 5px;
             padding-bottom: 5px;
+            display: flex;
+            align-items: center;
         }
     }
 

@@ -1,7 +1,14 @@
 <template>
     <div class="register">
         <nav-bar title="用 户 注 册" class="register-title"></nav-bar>
-        <van-form colon label-width="70px" label-align="center" @submit="onSubmit" class="register-form">
+
+        <div class="register-icon">
+            <svg aria-hidden="true" style="height: 60px; width: 60px">
+                <use xlink:href="#icon-longmao1"></use>
+            </svg>
+        </div>
+
+        <van-form colon label-width="80px" label-align="center" @submit="onSubmit" class="register-form">
             <van-field
                     v-model="username"
                     name="username"
@@ -23,7 +30,7 @@
                     v-model="repeatPassword"
                     type="password"
                     name="repeatPassword"
-                    label="密 码"
+                    label="确认密码"
                     placeholder="请再次输入密码"
                     :rules="[{ validator, message: '两次输入密码不一致'}]"
                     class="register-form-password"
@@ -94,8 +101,14 @@
         }
     }
 
+    &-icon{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
     &-form{
-        margin-top: 150px;
+        margin-top: 40px;
     }
 }
 </style>
