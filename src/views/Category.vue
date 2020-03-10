@@ -66,7 +66,7 @@
             return {
                 activeKey: 0,
                 searchValue: '',
-                categoryList: [],
+                categoryList: [{"name":"推荐分类","id":"0"}],
                 subList: [],
                 bannerImage: require("../assets/img/category/category_banner.png")
             };
@@ -96,7 +96,9 @@
         },
         created() {
             listCategories().then(res => {
-                this.categoryList = res.data
+                for (let item of res.data){
+                    this.categoryList.push(item)
+                }
             }).catch(e => {
                 console.log(e)
             })

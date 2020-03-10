@@ -1,5 +1,4 @@
 <template>
-    <transition :name="transitionName">
     <div  class="setting">
         <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
@@ -57,7 +56,6 @@
             />
         </van-popup>
     </div>
-    </transition>
 </template>
 <script>
     import NavBar from "../../components/NavBar";
@@ -234,11 +232,6 @@
 .setting{
     padding-bottom: 10px ;
     background-color: #e6e6e6;
-
-    position: absolute;
-    width: 100%;
-    transition: all .8s ease;
-    top: 0;
 
     &-title{
         .van-nav-bar__title{

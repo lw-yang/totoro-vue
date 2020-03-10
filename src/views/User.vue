@@ -145,8 +145,7 @@
     .user{
         height: 220px;
         padding-top: 10px;
-        background-image: url("../assets/img/user/user-background.png");
-
+        background-image: linear-gradient(to bottom right, #ED4C66, #FBC7A5);
         &-setting{
             height: 30px;
             display: flex;
