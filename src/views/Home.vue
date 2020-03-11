@@ -22,8 +22,6 @@
                     <van-icon name="bars" size="17"/>分类
                 </div>
             </div>
-
-
             <div class="home-advertise-swipe">
                 <van-swipe :autoplay="3000" :height="150">
                     <van-swipe-item v-for="(image, index) in swipeImages" :key="index">
@@ -34,6 +32,9 @@
                     </van-swipe-item>
                 </van-swipe>
             </div>
+
+            <home-category :home-category-list="homeCategoryList"></home-category>
+
 
         </div>
 
@@ -49,7 +50,9 @@
     import { Image } from 'vant';
     import { Tab, Tabs } from 'vant';
     import {listCategories} from "../api/category";
-
+    import category from "../assets/js/category";
+    import HomeCategory from "../components/home/HomeCategory";
+    import homeCategoryList from "../assets/js/home-category"
     Vue.use(Tab);
     Vue.use(Tabs);
     Vue.use(Image);
@@ -61,6 +64,7 @@
     export default {
         name: 'Home',
         components: {
+            HomeCategory
         },
         data() {
             return{
@@ -70,7 +74,8 @@
                 swipeImages: [
                     'https://img.yzcdn.cn/vant/apple-1.jpg',
                     'https://img.yzcdn.cn/vant/cat.jpeg'
-                ]
+                ],
+                homeCategoryList: []
             }
         },
         methods: {
@@ -88,6 +93,16 @@
                     this.tabCategory.push(item)
                 }
             }).catch(e => {
+                this.tabCategory.push({"name":"首页","id":"0"})
+                for (let item of category){
+                    this.tabCategory.push(item)
+                }
+                console.log(e)
+            })
+            listCategories("home").then(res => {
+                this.homeCategoryList = res.data
+            }).catch(e => {
+                this.homeCategoryList = homeCategoryList
                 console.log(e)
             })
         }
@@ -99,14 +114,13 @@
     height: 500px;
     &-advertise{
         width: 100%;
-        height: 240px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        height: 220px;
         background-image: linear-gradient(to right, #d81e06, #e98f36);
 
         &-swipe{
             padding-left: 12px;
             padding-right: 12px;
+            border-radius: 30px;
         }
 
         &-tab{
@@ -118,6 +132,7 @@
                 font-size: 13px;
             }
             .van-tab--active{
+                font-weight: bold;
                 font-size: 14px;
             }
 

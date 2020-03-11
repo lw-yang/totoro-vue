@@ -16,7 +16,7 @@ const routes = [
         path: '/home',
         name: 'Home',
         meta: {tree: 1},
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
       {
         path: '/category',

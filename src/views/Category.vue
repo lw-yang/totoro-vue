@@ -53,7 +53,11 @@
     import { Search } from 'vant';
     import {listCategories} from "../api/category";
     import { Grid, GridItem } from 'vant';
-
+    import category from "../assets/js/category";
+    import recommend from "../assets/js/recommend";
+    import { Image } from 'vant';
+    import {Notify } from 'vant';
+    Vue.use(Image);
     Vue.use(Grid);
     Vue.use(GridItem);
     Vue.use(Search);
@@ -68,7 +72,7 @@
                 searchValue: '',
                 categoryList: [{"name":"推荐分类","id":"0"}],
                 subList: [],
-                bannerImage: require("../assets/img/category/category_banner.png")
+                bannerImage: require("../assets/img/category/category_banner.png"),
             };
         },
         methods: {
@@ -87,6 +91,7 @@
                 listCategories(null, parentId).then(res => {
                     this.subList = res.data
                 }).catch(e => {
+                    Notify("网络开小差了~")
                     console.log(e)
                 })
             },
@@ -100,11 +105,17 @@
                     this.categoryList.push(item)
                 }
             }).catch(e => {
+                for (let item of category){
+                    this.categoryList.push(item)
+                }
+                Notify("网络不稳定~")
                 console.log(e)
             })
+
             listCategories("recommend").then(res => {
                 this.subList = res.data
             }).catch(e => {
+                this.subList = recommend
                 console.log(e)
             })
         }
