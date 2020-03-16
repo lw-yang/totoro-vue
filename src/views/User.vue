@@ -142,6 +142,10 @@
     border-bottom: 5px solid #e6e6e6;
     margin-bottom: 55px;
 
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
     .user{
         height: 220px;
         padding-top: 10px;

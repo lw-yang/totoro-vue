@@ -1,9 +1,6 @@
 <template>
     <div class="home">
         <div class="home-advertise">
-            <van-notice-bar mode="link" click="noticeBar" style="height: 30px; font-size: 12px">
-                {{noticeText}}
-            </van-notice-bar>
 
             <van-search v-model="searchValue"
                         shape="round"
@@ -15,7 +12,6 @@
             <div class="home-advertise-tab">
                 <van-tabs style="width: 85%" color="white" background="linear-gradient(to right, #d81e06, #e87e37)" :border="false" >
                     <van-tab v-for="item in tabCategory" :title="item.name" :key="item.id" animated swipeable>
-                        <router-view/>
                     </van-tab>
                 </van-tabs>
                 <div class="home-advertise-tab-more" @click="toCategory">
@@ -32,12 +28,21 @@
                     </van-swipe-item>
                 </van-swipe>
             </div>
-
-            <home-category :home-category-list="homeCategoryList"></home-category>
-
-
         </div>
 
+        <home-category :home-category-list="homeCategoryList"></home-category>
+
+        <van-divider  :style="{ color: '#ED4C66', borderColor: '#ED4C66', padding: '0 16px', fontSize: '11px', fontWeight: 'bold'}">
+                每 日 秒 杀
+        </van-divider>
+
+        <sec-kill :secProductList="secProductList"></sec-kill>
+
+        <van-divider :style="{ color: '#ED4C66', borderColor: '#ED4C66', padding: '0 16px', fontSize: '11px',fontWeight: 'bold'}">
+            精 选 好 货
+        </van-divider>
+
+        <daily-feature :daily-feature-list="dailyFeatureList"></daily-feature>
 
     </div>
 </template>
@@ -53,6 +58,11 @@
     import category from "../assets/js/category";
     import HomeCategory from "../components/home/HomeCategory";
     import homeCategoryList from "../assets/js/home-category"
+    import { Divider } from 'vant';
+    import SecKill from "../components/home/SecKill";
+    import DailyFeature from "../components/home/DailyFeature";
+
+    Vue.use(Divider);
     Vue.use(Tab);
     Vue.use(Tabs);
     Vue.use(Image);
@@ -64,18 +74,46 @@
     export default {
         name: 'Home',
         components: {
+            DailyFeature,
+            SecKill,
             HomeCategory
         },
         data() {
             return{
                 searchValue: '',
-                noticeText: "Totoro商城-Totoro商城-Totoro商城-Totoro商城-Totoro商城-Totoro商城",
                 tabCategory: [],
                 swipeImages: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/cat.jpeg'
+                    require("../assets/img/category/category_banner.png"),
+                    require("../assets/img/category/category_banner.png"),
                 ],
-                homeCategoryList: []
+                homeCategoryList: [],
+
+                secProductList: [{
+                    "id": 111,
+                    "price": "100",
+                    "discountPrice": "80",
+                    "image": "https://img.yzcdn.cn/vant/cat.jpeg"
+                },{
+                    "id": 222,
+                    "price": "500",
+                    "discountPrice": "80",
+                    "image": "https://img.yzcdn.cn/vant/cat.jpeg"
+                }],
+                dailyFeatureList: [
+                    {
+                        "id": 111,
+                        "desc": "商品描述",
+                        "price": "100",
+                        "discountPrice": "80",
+                        "image": "https://img.yzcdn.cn/vant/cat.jpeg"
+                    },{
+                        "id": 111,
+                        "desc": "商品描述",
+                        "price": "500",
+                        "discountPrice": "80",
+                        "image": "https://img.yzcdn.cn/vant/cat.jpeg"
+                    }
+                ]
             }
         },
         methods: {
@@ -111,11 +149,20 @@
 
 <style lang="scss">
 .home{
-    height: 500px;
+    height: calc(100vh - 55px);
+    overflow: auto;
+    background-color: #f8f8f8;
+    &::-webkit-scrollbar{
+        display: none;
+    }
     &-advertise{
         width: 100%;
-        height: 220px;
+        height: 238px;
         background-image: linear-gradient(to right, #d81e06, #e98f36);
+
+        .van-search{
+            padding-bottom: 0;
+        }
 
         &-swipe{
             padding-left: 12px;
@@ -145,6 +192,10 @@
                 padding-left: 4px;
             }
         }
+    }
+
+    .van-divider{
+        margin: 8px 0;
     }
 }
 </style>
