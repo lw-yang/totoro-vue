@@ -32,15 +32,7 @@
 
         <home-category :home-category-list="homeCategoryList"></home-category>
 
-        <van-divider  :style="{ color: '#ED4C66', borderColor: '#ED4C66', padding: '0 16px', fontSize: '11px', fontWeight: 'bold'}">
-                每 日 秒 杀
-        </van-divider>
-
         <sec-kill :secProductList="secProductList"></sec-kill>
-
-        <van-divider :style="{ color: '#ED4C66', borderColor: '#ED4C66', padding: '0 16px', fontSize: '11px',fontWeight: 'bold'}">
-            精 选 好 货
-        </van-divider>
 
         <daily-feature :daily-feature-list="dailyFeatureList"></daily-feature>
 
@@ -157,7 +149,7 @@
     }
     &-advertise{
         width: 100%;
-        height: 238px;
+        height: 237px;
         background-image: linear-gradient(to right, #d81e06, #e98f36);
 
         .van-search{
@@ -168,6 +160,7 @@
             padding-left: 12px;
             padding-right: 12px;
             border-radius: 30px;
+
         }
 
         &-tab{

@@ -34,13 +34,13 @@
         padding-bottom: 1px;
     }
     .van-grid-item__icon-wrapper{
-        background-image: linear-gradient(to bottom right, #FBDE6D, #FBC7A5);
+        background-image: linear-gradient(to bottom right, #fbecc0, #fbba7a);
         height: 30px;
         width: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid #f3d994;
+        /*border: 1px solid #f3d994;*/
         border-radius: 50%;
     }
     .van-grid-item__text{

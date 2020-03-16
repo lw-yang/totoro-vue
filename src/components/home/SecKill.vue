@@ -44,8 +44,7 @@
 
 <style lang="scss">
 .sec{
-    margin: 0 10px;
-    padding: 10px;
+    margin: 20px 10px 10px 10px;
     border: 1px solid #ededed;
     border-radius: 10px;
     background-color: white;
@@ -53,10 +52,14 @@
     &-title{
         display: flex;
         align-items: center;
+        height: 30px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #edd1ab;
 
         &-text{
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -65,7 +68,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid #fa5f47;
+            border: 1px solid #fa2d2e;
             border-radius: 10px;
             height: 15px;
             width: 70px;
@@ -85,7 +88,7 @@
             display: none;
         }
         &-item{
-            padding: 10px 0 0 10px;
+            padding: 10px 0 10px 10px;
 
             &-image{
 
