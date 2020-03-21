@@ -2,7 +2,7 @@
     <div class="feature">
         <div class="feature-title">
             Totoro精选
-            <div style="color: #d81e06; font-style: italic; display: inline; font-size: 10px"> 品质新生活</div>
+            <div class="feature-title-text"> 品质新生活</div>
         </div>
         <van-card
                 :price="item.price"
@@ -50,6 +50,14 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         background-color: #edd1db;
+
+        &-text {
+            color: #d81e06;
+            font-style: italic;
+            display: inline;
+            font-size: 10px;
+            margin-left: 10px;
+        }
     }
 }
 </style>

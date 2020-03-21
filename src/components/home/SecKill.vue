@@ -55,7 +55,7 @@
         height: 30px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        background-color: #edd1ab;
+        background-color: #fbe1cd;
 
         &-text{
             font-weight: bold;

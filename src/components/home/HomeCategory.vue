@@ -34,7 +34,7 @@
         padding-bottom: 1px;
     }
     .van-grid-item__icon-wrapper{
-        background-image: linear-gradient(to bottom right, #fbecc0, #fbba7a);
+        background-image: linear-gradient(to bottom right, #fbecc0, #ffbccb);
         height: 30px;
         width: 30px;
         display: flex;

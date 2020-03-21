@@ -6,11 +6,11 @@
                         shape="round"
                         right-icon="scan"
                         placeholder="请输入搜索关键词"
-                        background="linear-gradient(to right, #d81e06, #e98f36)"
+                        background="linear-gradient(to bottom, #d81e06, #DF4835)"
             />
 
             <div class="home-advertise-tab">
-                <van-tabs style="width: 85%" color="white" background="linear-gradient(to right, #d81e06, #e87e37)" :border="false" >
+                <van-tabs style="width: 85%" color="white" background="linear-gradient(to bottom, #DF4835, #E87E70)" :border="false" >
                     <van-tab v-for="item in tabCategory" :title="item.name" :key="item.id" animated swipeable>
                     </van-tab>
                 </van-tabs>
@@ -150,7 +150,7 @@
     &-advertise{
         width: 100%;
         height: 237px;
-        background-image: linear-gradient(to right, #d81e06, #e98f36);
+        background-image: linear-gradient(to bottom, #d81e06, white);
 
         .van-search{
             padding-bottom: 0;
