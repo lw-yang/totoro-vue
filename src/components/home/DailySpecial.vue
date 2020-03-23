@@ -1,22 +1,20 @@
 <template>
     <div class="sec">
         <div class="sec-title">
-            <div class="sec-title-text">Totoro秒杀</div>
-            <div class="sec-title-time">
-                <van-count-down :time="time" millisecond format="HH:mm:ss:SS"></van-count-down>
-            </div>
+            每日特价
+            <div class="sec-title-text">超低价好货</div>
         </div>
         <div class="sec-product" >
-            <div class="sec-product-item" v-for="item in secProductList" :key="item.id">
+            <div class="sec-product-item" v-for="item in specialProductList" :key="item.id">
                 <div class="sec-product-item-image">
                     <van-image
                             width="80"
                             height="80"
-                            :src="item.image"
+                            :src="item.productThumb"
                     />
                 </div>
                 <div class="sec-product-item-discount-price">￥{{item.discountPrice}}</div>
-                <div class="sec-product-item-price">￥{{item.price}}</div>
+                <div class="sec-product-item-price">￥{{item.originPrice}}</div>
             </div>
         </div>
     </div>
@@ -32,7 +30,7 @@
     export default {
         name: "secKill",
         props: {
-            secProductList: Array
+            specialProductList: Array
         },
         data() {
             return {
@@ -52,16 +50,20 @@
     &-title{
         display: flex;
         align-items: center;
+        font-weight: bold;
+        font-size: 12px;
+        padding-left: 10px;
         height: 30px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         background-color: #fbe1cd;
 
-        &-text{
-            font-weight: bold;
-            font-size: 12px;
-            padding-left: 10px;
-            padding-right: 10px;
+        &-text {
+            color: #d81e06;
+            font-style: italic;
+            display: inline;
+            font-size: 10px;
+            margin-left: 10px;
         }
 
         &-time{
@@ -101,6 +103,7 @@
                 justify-content: center;
             }
             &-discount-price{
+                font-weight: bold;
                 font-size: 11px;
                 display: flex;
                 justify-content: center;

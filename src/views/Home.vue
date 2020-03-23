@@ -32,9 +32,9 @@
 
         <home-category :home-category-list="homeCategoryList"></home-category>
 
-        <sec-kill :secProductList="secProductList"></sec-kill>
+        <daily-special :specialProductList="specialProductList"></daily-special>
 
-        <daily-feature :daily-feature-list="dailyFeatureList"></daily-feature>
+        <daily-choice :dailyChoiceList="dailyChoiceList"></daily-choice>
 
     </div>
 </template>
@@ -51,8 +51,9 @@
     import HomeCategory from "../components/home/HomeCategory";
     import homeCategoryList from "../assets/js/home-category"
     import { Divider } from 'vant';
-    import SecKill from "../components/home/SecKill";
-    import DailyFeature from "../components/home/DailyFeature";
+    import DailySpecial from "../components/home/DailySpecial";
+    import DailyChoice from "../components/home/DailyChoice";
+    import {listDailyChoice, listDailySpecial} from "../api/advertise";
 
     Vue.use(Divider);
     Vue.use(Tab);
@@ -66,8 +67,8 @@
     export default {
         name: 'Home',
         components: {
-            DailyFeature,
-            SecKill,
+            DailyChoice,
+            DailySpecial,
             HomeCategory
         },
         data() {
@@ -79,33 +80,8 @@
                     require("../assets/img/category/category_banner.png"),
                 ],
                 homeCategoryList: [],
-
-                secProductList: [{
-                    "id": 111,
-                    "price": "100",
-                    "discountPrice": "80",
-                    "image": "https://img.yzcdn.cn/vant/cat.jpeg"
-                },{
-                    "id": 222,
-                    "price": "500",
-                    "discountPrice": "80",
-                    "image": "https://img.yzcdn.cn/vant/cat.jpeg"
-                }],
-                dailyFeatureList: [
-                    {
-                        "id": 111,
-                        "desc": "商品描述",
-                        "price": "100",
-                        "discountPrice": "80",
-                        "image": "https://img.yzcdn.cn/vant/cat.jpeg"
-                    },{
-                        "id": 111,
-                        "desc": "商品描述",
-                        "price": "500",
-                        "discountPrice": "80",
-                        "image": "https://img.yzcdn.cn/vant/cat.jpeg"
-                    }
-                ]
+                specialProductList: [],
+                dailyChoiceList: []
             }
         },
         methods: {
@@ -133,6 +109,19 @@
                 this.homeCategoryList = res.data
             }).catch(e => {
                 this.homeCategoryList = homeCategoryList
+                console.log(e)
+            })
+
+            listDailySpecial().then(res => {
+                this.specialProductList = res.data
+            }).catch(e => {
+                console.log(e)
+            })
+
+            listDailyChoice().then(res => {
+                console.log(res.data)
+                this.dailyChoiceList = res.data
+            }).catch(e => {
                 console.log(e)
             })
         }

@@ -1,16 +1,17 @@
 <template>
     <div class="feature">
         <div class="feature-title">
-            Totoro精选
+            每日精选
             <div class="feature-title-text"> 品质新生活</div>
         </div>
         <van-card
-                :price="item.price"
-                :desc="item.desc"
-                :title="item.name"
-                thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-                v-for="item in dailyFeatureList"
+                v-for="item in dailyChoiceList"
                 :key="item.id"
+                :price="item.productPrice"
+                :desc="item.productDesc"
+                :title="item.productName"
+                :tag="item.choiceTag"
+                thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
         />
     </div>
 </template>
@@ -23,7 +24,7 @@
     export default {
         name: "DailyFeature",
         props: {
-            dailyFeatureList : Array
+            dailyChoiceList : Array
         }
     }
 </script>

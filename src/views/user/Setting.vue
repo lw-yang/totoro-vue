@@ -231,7 +231,7 @@
 <style lang="scss">
 .setting{
     padding-bottom: 10px ;
-    background-color: #e6e6e6;
+    background-color: #f4f4f4;
 
     &-title{
         .van-nav-bar__title{

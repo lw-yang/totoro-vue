@@ -138,8 +138,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #e6e6e6;
-    border-bottom: 5px solid #e6e6e6;
+    background-color: #f4f4f4;
+    border-bottom: 5px solid #f4f4f4;
     margin-bottom: 55px;
 
     &::-webkit-scrollbar{

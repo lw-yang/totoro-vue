@@ -31,7 +31,7 @@
 <style lang="scss">
 .home-category{
     .van-grid-item__content{
-        padding-bottom: 1px;
+        padding-bottom: 2px;
     }
     .van-grid-item__icon-wrapper{
         background-image: linear-gradient(to bottom right, #fbecc0, #ffbccb);
