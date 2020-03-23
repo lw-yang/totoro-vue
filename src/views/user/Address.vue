@@ -1,6 +1,6 @@
 <template>
     <div class="address">
-        <nav-bar title="地 址 管 理" path="/setting/" class="address-title"></nav-bar>
+        <nav-bar title="地 址 管 理" path="/user/setting/" class="address-title"></nav-bar>
         <van-address-list
                 v-model="chosenAddressId"
                 :list="list"
@@ -29,10 +29,10 @@
         },
         methods: {
             onAdd() {
-                this.$router.push("/setting/addressAdd")
+                this.$router.push("/user/setting/address/add")
             },
             onEdit(item) {
-                this.$router.push({ path: '/setting/addressEdit', query: { address: item}})
+                this.$router.push({ path: '/user/setting/address/edit', query: { address: item}})
             }
         },
         created() {
@@ -46,6 +46,10 @@
                     address.name = i.receiver
                     address.tel = i.receiverPhone
                     address.isDefault = i.defaultAddress !== 0
+
+                    if (address.isDefault === true){
+                        this.chosenAddressId = address.id
+                    }
                     this.list.push(address)
                 }
             }).catch(e => {

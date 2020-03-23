@@ -19,7 +19,10 @@
             </div>
             <div class="category-container-main">
                 <div class="category-container-main-banner">
-
+                    <van-image
+                            height="145"
+                            :src="bannerImage"
+                    />
                 </div>
                 <div class="category-container-main-sub">
                     <div class="category-container-main-sub-title">
@@ -50,7 +53,11 @@
     import { Search } from 'vant';
     import {listCategories} from "../api/category";
     import { Grid, GridItem } from 'vant';
-
+    import category from "../assets/js/category";
+    import recommend from "../assets/js/recommend";
+    import { Image } from 'vant';
+    import {Notify } from 'vant';
+    Vue.use(Image);
     Vue.use(Grid);
     Vue.use(GridItem);
     Vue.use(Search);
@@ -63,8 +70,9 @@
             return {
                 activeKey: 0,
                 searchValue: '',
-                categoryList: [],
-                subList: []
+                categoryList: [{"name":"推荐分类","id":"0"}],
+                subList: [],
+                bannerImage: require("../assets/img/category/category_banner.png"),
             };
         },
         methods: {
@@ -83,6 +91,7 @@
                 listCategories(null, parentId).then(res => {
                     this.subList = res.data
                 }).catch(e => {
+                    Notify("网络开小差了~")
                     console.log(e)
                 })
             },
@@ -92,13 +101,21 @@
         },
         created() {
             listCategories().then(res => {
-                this.categoryList = res.data
+                for (let item of res.data){
+                    this.categoryList.push(item)
+                }
             }).catch(e => {
+                for (let item of category){
+                    this.categoryList.push(item)
+                }
+                Notify("网络不稳定~")
                 console.log(e)
             })
+
             listCategories("recommend").then(res => {
                 this.subList = res.data
             }).catch(e => {
+                this.subList = recommend
                 console.log(e)
             })
         }
@@ -147,10 +164,7 @@
             &-banner{
                 height: 145px;
                 width: 100%;
-                background-image: url("../assets/img/category/category_banner.png");
-                background-size: 100%;
             }
-
             &-sub{
                 margin-top: 10px;
 

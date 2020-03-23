@@ -49,7 +49,7 @@
                 data.defaultAddress = content.isDefault === true ? 1 : 0
                 updateAddress(userId ,addressId, data).then(res => {
                     console.log(res)
-                    this.$router.replace("/setting/address")
+                    this.$router.replace("/user/setting/address")
                 }).catch(e => {
                     console.log(e)
                 })
@@ -59,7 +59,7 @@
                 let addressId = this.addressInfo.id
                 deleteAddress(userId, addressId).then(res => {
                     console.log(res)
-                    this.$router.replace("/setting/address")
+                    this.$router.replace("/user/setting/address")
                 }).catch(e => {
                     console.log(e)
                 })

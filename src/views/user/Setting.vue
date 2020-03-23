@@ -1,10 +1,10 @@
 <template>
-    <div class="setting">
+    <div  class="setting">
         <nav-bar title="用 户 设 置" path="/user" class="setting-title"></nav-bar>
         <van-cell-group class="setting-info">
 
             <van-cell title="头像" clickable  class="setting-info-avatar" @click="popupAvatar">
-                <van-uploader style="width:50px" :after-read="uploadAvatar">
+                <van-uploader  :after-read="uploadAvatar">
                     <div class="setting-info-avatar-upload">
                         <van-image
                             round
@@ -26,7 +26,7 @@
         <van-cell-group class="setting-contact">
             <van-cell title="邮箱" :value="email" icon="" is-link @click="popupEmail"/>
             <van-cell title="手机号" :value="phoneStr" icon="" is-link @click="popupPhone"/>
-            <van-cell title="地址管理" :value="address" icon="" is-link to="/setting/address"/>
+            <van-cell title="地址管理" :value="address" icon="" is-link to="/user/setting/address"/>
         </van-cell-group>
         <van-cell-group class="setting-service">
             <van-cell title="优惠券" icon="" to="/user/coupon" is-link/>
@@ -57,7 +57,6 @@
         </van-popup>
     </div>
 </template>
-
 <script>
     import NavBar from "../../components/NavBar";
     import Vue from 'vue';
@@ -105,20 +104,23 @@
             }
         },
         computed: {
+                transitionName () {
+                    return this.$store.getters.transitionName
+                },
+
             sexStr: function () {
-                if (this.sex == null){
-                    return ''
-                }
                 if (this.sex === 1){
                     return "男"
                 }else if (this.sex === 2){
                     return "女"
-                }else {
+                }else if (this.sex === 0){
                     return "保密"
+                }else {
+                    return ''
                 }
             },
             phoneStr: function () {
-                if (this.phone == null){
+                if (this.phone == null || this.phone === ''){
                     return null
                 }
                 let prefix = this.phone.substring(0, 3)
@@ -133,6 +135,7 @@
             },
             logout(){
                 window.localStorage.removeItem("token")
+                this.$store.commit("setToken", String)
                 this.$store.commit("setUser", Object)
                 this.$router.replace("/user")
             },
@@ -228,7 +231,7 @@
 <style lang="scss">
 .setting{
     padding-bottom: 10px ;
-    background-color: #e6e6e6;
+    background-color: #f4f4f4;
 
     &-title{
         .van-nav-bar__title{

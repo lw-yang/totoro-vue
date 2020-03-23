@@ -1,15 +1,16 @@
 <template>
-    <div>
+    <div class="cart">
         cart
     </div>
 </template>
 
 <script>
     export default {
-        name: "Cart"
+        name: "Cart",
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.cart{
+}
 </style>

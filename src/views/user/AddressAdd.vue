@@ -45,7 +45,7 @@
                 data.defaultAddress = content.isDefault === true ? 1 : 0
                 addAddress(id, data).then(res => {
                     console.log(res)
-                    this.$router.replace("/setting/address")
+                    this.$router.replace("/user/setting/address")
                 }).catch(e => {
                     console.log(e)
                 })

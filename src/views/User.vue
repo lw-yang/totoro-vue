@@ -101,13 +101,12 @@
                 }
             },
             toSetting(){
-                this.$router.push("/setting")
+                this.$router.push("/user/setting")
             },
             toQR(){
                 this.$router.push('/user/qr')
             }
         },
-
         created() {
             let token = window.localStorage.getItem("token")
             if (token !== null && this.$store.getters.userInfo.nickname == null){
@@ -139,15 +138,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #e6e6e6;
-    border-bottom: 5px solid #e6e6e6;
+    background-color: #f4f4f4;
+    border-bottom: 5px solid #f4f4f4;
     margin-bottom: 55px;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
 
     .user{
         height: 220px;
         padding-top: 10px;
-        background-image: url("../assets/img/user/user-background.png");
-
+        background-image: linear-gradient(to bottom right, #ED4C66, #FBC7A5);
         &-setting{
             height: 30px;
             display: flex;
